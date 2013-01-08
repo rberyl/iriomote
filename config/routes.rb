@@ -1,4 +1,6 @@
 Iriomote::Application.routes.draw do
+  get "users/new"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -55,4 +57,13 @@ Iriomote::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+get "log_out" => "sessions#destroy", :as => "log_out"
+get "log_in" => "sessions#new", :as => "log_in"
+get "sign_up" => "users#new", :as => "sign_up"
+get "edit" => "users#edit", :as => "edit"
+match "update" => "users#update", :as => "update"
+get "show/:id" => "users#show", :as => "show"
+root :to => "users#new"
+resources :users
+resources :sessions
 end
